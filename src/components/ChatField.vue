@@ -1,0 +1,136 @@
+<template>
+    <div class="chat-field">
+            <!-- Here are the suggestions -->
+                    <!-- Microphone Button -->
+            <button
+                key="microphone"
+                class="chat-field-action"
+                :aria-label="(translations[lang()] && translations[lang()].microphoneTitle) || translations[config.fallback_lang].microphoneTitle"
+                :title="(translations[lang()] && translations[lang()].microphoneTitle) || translations[config.fallback_lang].microphoneTitle"
+                :class="{'mic_active': microphone}"
+                :disabled="disabled"
+                @click="microphone = !microphone">
+                <i class="material-icons" aria-hidden="true">mic</i>
+            </button>
+    </div>
+</template>
+
+<style lang="sass" scoped>
+@import '@/style/mixins'
+
+.chat-field
+    display: flex
+    align-items: center
+    justify-content: center
+    height: 50vh
+    position: fixed
+    bottom: 0
+    left: 0
+    width: 100%
+    background-color: var(--background)
+    z-index: 2
+
+
+.chat-field-action
+    @include reset
+    cursor: pointer
+    color: var(--accent)
+    font-size: 50px
+    display: flex
+
+    &:disabled
+        cursor: not-allowed
+
+    &.mic_active
+        color: #F44336
+
+</style>
+
+<script>
+import AudioRecorder from 'audio-recorder-polyfill'
+import * as hark from 'hark'
+
+window.MediaRecorder = AudioRecorder
+
+export default {
+    name: 'ChatField',
+    data(){
+        return {
+            query: '',
+            microphone: false,
+            recognition: null,
+            recorder: null,
+            should_listen: false,
+            disabled: false
+        }
+    },
+    computed: {
+        microphone_supported(){
+            return window.webkitSpeechRecognition || window.SpeechRecognition || !window.MediaRecorder.notSupported
+        }
+    },
+    watch: {
+        /* Toggle microphone */
+        microphone(activate){
+            if (activate){
+                this.should_listen = true
+                this.$emit('listening')
+
+                if (window.webkitSpeechRecognition || window.SpeechRecognition){
+                    this.recognition = new window.webkitSpeechRecognition() || new window.SpeechRecognition()
+                    this.recognition.interimResults = true
+                    this.recognition.lang = this.lang()
+                    this.recognition.onresult = event => {
+                        for (let i = event.resultIndex; i < event.results.length; ++i){
+                            this.query = event.results[i][0].transcript // <- push results to the Text input
+                        }
+                    }
+
+                    this.recognition.onend = () => {
+                        this.recognition.stop()
+                        this.microphone = false
+                        this.submit({text: this.query}) // <- submit the result
+                    }
+
+                    this.recognition.onerror = () => this.microphone = false
+                    this.recognition.start()
+                }
+
+                else if (window.MediaRecorder){
+                    navigator.mediaDevices.getUserMedia({audio: true})
+                    .then(stream => {
+                        this.recorder = new window.MediaRecorder(stream)
+                        this.recorder.addEventListener('dataavailable', recording => {
+                            const reader = new FileReader()
+                            reader.readAsDataURL(recording.data)
+                            reader.onloadend = () => {
+                                this.submit({audio: reader.result.replace(/^data:.+;base64,/, '')})
+                            }
+                        })
+
+                        hark(this.recorder.stream).on('stopped_speaking', () => this.microphone = false) // <- Speech end detection
+                        this.recorder.start()
+                    })
+                    .catch(() => this.microphone = false)
+                }
+            }
+
+            else if (this.recognition) this.recognition.abort()
+            else if (this.recorder) this.recorder.stop()
+        }
+    },
+    methods: {
+        listen(){
+            if (this.should_listen) this.microphone = false
+        },
+        submit(submission){
+            if (submission.text && submission.text.length > 0){
+                this.$emit('submit', submission)
+                this.query = ''
+            }
+
+            else if (submission.audio) this.$emit('submit', submission)
+        }
+    }
+}
+</script>
