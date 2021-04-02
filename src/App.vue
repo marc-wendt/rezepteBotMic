@@ -273,9 +273,20 @@ export default {
                 let voices = [];
                 voices = window.speechSynthesis.getVoices();
                 speech.voiceURI = this.config.voice
-                speech.lang = this.lang()
+                speech.lang = "de-DE";
                 speech.pitch = 1.1;
                 speech.rate = 1.0;
+                speech.voice = voices[2]
+
+                console.log(`Voices #: ${speechSynthesis.getVoices().length}`)
+
+                speechSynthesis.getVoices().forEach(voice => {
+                console.log(voice.name, voice.lang)
+                }) 
+                
+                if(vm.$browserDetect.isSafari){
+                   speech.voice = voices[9] 
+                }
                 speech.voice = voices[2]
                 speech.onend = () => this.$refs.input.listen()
 
