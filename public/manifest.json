@@ -1,6 +1,6 @@
 {
-    "name": "appname",
-    "short_name": "appname",
+    "name": "rezepteBot",
+    "short_name": "rezepteBot",
     "icons": [{
         "src": "./img/icons/android-chrome-192x192.png",
         "sizes": "192x192",
