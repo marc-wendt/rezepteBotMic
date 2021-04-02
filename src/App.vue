@@ -5,15 +5,6 @@
             
             
         </TopHead>
-		
-		<div class="task-box">
-            <ul>
-                <h1>Aufgaben</h1>
-                <li v-for="task in taskList" :key="task.id">
-                {{ task.label }}
-                </li>
-            </ul>
-        </div>
 
         <div class="chat">
             <!-- Error component is for displaying errors -->
