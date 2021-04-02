@@ -5,8 +5,8 @@
             <button
                 key="microphone"
                 class="chat-field-action"
-                :aria-label="(translations[lang()] && translations[lang()].microphoneTitle) || translations[config.fallback_lang].microphoneTitle"
-                :title="(translations[lang()] && translations[lang()].microphoneTitle) || translations[config.fallback_lang].microphoneTitle"
+                :aria-label="mic"
+                :title="mic"
                 :class="{'mic_active': microphone}"
                 :disabled="disabled"
                 @click="microphone = !microphone">
