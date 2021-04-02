@@ -291,6 +291,7 @@ export default {
 
                 if(isSafari){
                    speech.voice = voices[4] // 4 oder 5
+		   speech.rate = 0.8;
                    console.log("Safari")
                 } else {
                     if(window.$browserDetect.isChrome){
