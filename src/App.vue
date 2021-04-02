@@ -2,14 +2,14 @@
     <main id="app">
         <!-- TopHead is the header with the information about the app -->
         <TopHead v-if="agent && messages.length > 0" :agent="agent">
-            <!-- Audio toggle (on the top right corner), used to toggle the audio output, default mode is defined in the settings -->
+            
             
         </TopHead>
 		
 		<div class="task-box">
             <ul>
                 <h1>Aufgaben</h1>
-                <li v-for="task in Tasks" v-bind:key="task">
+                <li v-for="task in taskList" :key="task.id">
                 {{ task.label }}
                 </li>
             </ul>
@@ -87,7 +87,7 @@ export default {
             error: null,
             client: new Client(this.config.endpoint),
             audio: new Audio(),
-			Tasks: [
+			taskList: [
                 { id: ('task1'), label: 'Frage nach einem Rezept'},
                 { id: ('task2'), label: 'Frage nach einem Rezept'},
                 { id: ('task3'), label: 'Frage nach einem Rezept'},
@@ -276,16 +276,20 @@ export default {
                 speech.lang = "de-DE";
                 speech.pitch = 1.1;
                 speech.rate = 1.0;
-                speech.voice = voices[2]
+                speech.voice = voices[1]
 
-                console.log(`Voices #: ${speechSynthesis.getVoices().length}`)
+                //console.log(`Voices #: ${speechSynthesis.getVoices().length}`)
 
-                speechSynthesis.getVoices().forEach(voice => {
-                console.log(voice.name, voice.lang)
-                }) 
-                
-                if(vm.$browserDetect.isSafari){
-                   speech.voice = voices[9] 
+                //speechSynthesis.getVoices().forEach(voice => {
+                //console.log(voice.name, voice.lang)
+                //}) 
+
+                if(this.$browserDetect.isSafari){
+                   speech.voice = voices[4] // 4 oder 5
+                   console.log("Safari")
+                } else if(this.$browserDetect.isChrome){
+                    console.log("Chrome")
+                    speech.voice = voices[2]
                 }
                 speech.voice = voices[2]
                 speech.onend = () => this.$refs.input.listen()
