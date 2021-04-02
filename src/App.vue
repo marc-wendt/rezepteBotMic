@@ -276,13 +276,15 @@ export default {
                 speech.lang = "de-DE";
                 speech.pitch = 1.1;
                 speech.rate = 1.0;
-                speech.voice = voices[1]
+                //speech.voice = voices[1]
 
                 //console.log(`Voices #: ${speechSynthesis.getVoices().length}`)
 
                 //speechSynthesis.getVoices().forEach(voice => {
                 //console.log(voice.name, voice.lang)
-                //}) 
+                //})
+                
+                speech.voice = voices[4]
 
                 if(this.$browserDetect.isSafari){
                    speech.voice = voices[4] // 4 oder 5
@@ -290,8 +292,11 @@ export default {
                 } else if(this.$browserDetect.isChrome){
                     console.log("Chrome")
                     speech.voice = voices[2]
+                } else if(this.$browserDetect.isFirefox){
+                    console.log("Firefox")
+                    speech.voice = voices[0]
                 }
-                speech.voice = voices[2]
+                //speech.voice = voices[2]
                 speech.onend = () => this.$refs.input.listen()
 
                 if (!this.muted) window.speechSynthesis.speak(speech) // <- if app is not muted, speak out the speech
