@@ -285,10 +285,10 @@ export default {
 		   speech.rate = 0.8;
                    console.log("Safari")
                 } else {
-                    if(window.$browserDetect.isChrome){
+                    if(this.$browserDetect.isChrome){
                         console.log("Chrome")
                         speech.voice = voices[2]
-                    } else if(window.$browserDetect.isFirefox){
+                    } else if(this.$browserDetect.isFirefox){
                         console.log("Firefox")
                         speech.voice = voices[0]
                     }
