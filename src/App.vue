@@ -293,10 +293,10 @@ export default {
                    speech.voice = voices[4] // 4 oder 5
                    console.log("Safari")
                 } else {
-                    if(this.$browserDetect.isChrome){
+                    if(window.$browserDetect.isChrome){
                         console.log("Chrome")
                         speech.voice = voices[2]
-                    } else if(this.$browserDetect.isFirefox){
+                    } else if(window.$browserDetect.isFirefox){
                         console.log("Firefox")
                         speech.voice = voices[0]
                     }
