@@ -54,6 +54,12 @@
     font-size: 18px
     color: var(--text-title)
     line-height: 15px
+    
+.task-box
+    color: var(--text-title)
+    padding: 12px
+    flex: 15 0 0
+    display: inline-block
 
 .top-head-subtitle
     color: var(--text-secondary)
