@@ -3,13 +3,16 @@ import App from './App.vue'
 
 import config from './config'
 import translations from './translations/translations.json'
+import browserDetect from "vue-browser-detect-plugin"
 import { register_service_worker } from './utils'
+
 
 register_service_worker()
 
 Vue.config.productionTip = false
 Vue.prototype.config = config // <- set config to global scope
 Vue.prototype.translations = translations // <- set translations to global scope
+Vue.use(browserDetect);
 
 /* (global) This code is going to tell us, if history mode can be activated on the client, so the application can be consumed without sessionStorage */
 Vue.prototype.history = () => {
