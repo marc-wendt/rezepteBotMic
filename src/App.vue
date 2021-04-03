@@ -5,6 +5,8 @@
             
             
         </TopHead>
+		
+		
 
         <div class="chat">
             <!-- Error component is for displaying errors -->
@@ -276,12 +278,14 @@ export default {
                 //})
                 
                 speech.voice = voices[4]
+                
 
                 var isSafari = window.safari !== undefined;
                 if (isSafari) console.log("Safari, yeah!");
 
                 if(isSafari){
                    speech.voice = voices[4] // 4 oder 5
+				   	speech.rate = 0.8;
                    console.log("Safari")
                 } else {
                     if(this.$browserDetect.isChrome){
