@@ -2,14 +2,14 @@
     "name": "rezepteBot",
     "short_name": "rezepteBot",
     "icons": [{
-        "src": "./img/icons/icon.svg",
+        "src": "./img/icons/android-chrome-192x192.png",
         "sizes": "192x192",
-        "type": "image/svg"
+        "type": "image/png"
     },
     {
-        "src": "./img/icons/icon.svg",
+        "src": "./img/icons/android-chrome-512x512.png",
         "sizes": "512x512",
-        "type": "image/svg"
+        "type": "image/png"
     }],
     "start_url": "./index.html",
     "display": "standalone"
