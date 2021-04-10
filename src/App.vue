@@ -267,15 +267,17 @@ export default {
                 voices = window.speechSynthesis.getVoices();
                 speech.voiceURI = this.config.voice
                 speech.lang = "de-DE";
-                speech.pitch = 1.1;
-                speech.rate = 1.0;
+                //speech.pitch = 1.1;
+                //speech.rate = 1;
                 //speech.voice = voices[1]
+                console.log(speech.pitch, speech.rate, speech.voice )
 
-                //console.log(`Voices #: ${speechSynthesis.getVoices().length}`)
+                console.log(`Voices #: ${speechSynthesis.getVoices().length}`)
 
-                //speechSynthesis.getVoices().forEach(voice => {
-                //console.log(voice.name, voice.lang)
-                //})
+                speechSynthesis.getVoices().forEach(voice => {
+                console.log(voice.name, voice.lang)
+                })
+                let isPlaying = false;
                 
                 speech.voice = voices[4]
                 
@@ -297,9 +299,28 @@ export default {
                     }
                 }
                 //speech.voice = voices[2]
-                speech.onend = () => this.$refs.input.listen()
+                //speech.onend = () => this.$refs.input.listen()
 
-                if (!this.muted) window.speechSynthesis.speak(speech) // <- if app is not muted, speak out the speech
+                var synth = window.speechSynthesis;
+
+                synth.speak(speech) // <- if app is not muted, speak out the speech
+                isPlaying = true;
+                //console.log("paused:" + synth.paused + " pending:" + synth.pending + " speak:" + synth.speaking);
+
+                if(this.$browserDetect.isChrome){
+                var synthesisInterval = setInterval(() => {
+                    if (!isPlaying) {
+                        clearInterval(synthesisInterval);
+                    } else {
+                        console.log("pause and resume")
+                        synth.pause();
+                        synth.resume();
+                    } 
+                }, 14000);
+
+                speech.onend = () => {
+                    isPlaying = false;
+                }
             }
         },
         /* Stop audio speech/playback */
