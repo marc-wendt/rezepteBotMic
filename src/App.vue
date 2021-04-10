@@ -321,6 +321,7 @@ export default {
                 speech.onend = () => {
                     isPlaying = false;
                 }
+		}
             }
         },
         /* Stop audio speech/playback */
