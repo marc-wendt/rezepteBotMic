@@ -10,14 +10,6 @@
                 <!-- Comment <div class="top-head-subtitle">{{(translations[lang()] && translations[lang()].poweredBy) || translations[config.fallback_lang].poweredBy}} <a target="_blank" rel="noopener noreferrer" href="https://dialogflow.cloud.ushakov.co" aria-hidden="true">Dialogflow Gateway</a></div> -->
             </div>  
         </div>
-                <div class="task-box">
-                    <ul>
-                        <h1>Aufgaben</h1>
-                        <li v-for="task in Tasks" v-bind:key="task.id">
-                        {{ task.label }}
-                        </li>
-                    </ul>
-                </div>
     </header>
 </template>
 
@@ -79,16 +71,6 @@ export default {
             default: null
         }
     },
-    data(){
-        return {
-            Tasks: [
-                { id: ('task1'), label: 'Frage nach einem Rezept'},
-                { id: ('task2'), label: 'Frage nach einem Rezept'},
-                { id: ('task3'), label: 'Frage nach einem Rezept'},
-                { id: ('task4'), label: 'Frage nach einem Rezept'}
-            ]
-        }
-    }
 }
 </script>
 
