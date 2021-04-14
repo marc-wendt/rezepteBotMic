@@ -1,5 +1,5 @@
 export default {
-    endpoint: 'https://testagent-kpuu.core.ushaflow.io', // <- enter your gateway URL here
+    endpoint: 'https://testprojekt-292212.core.ushaflow.io', // <- enter your gateway URL here
     start_suggestions: [], // <- array of suggestions, displayed at the start screen
     fallback_lang: 'de-DE', // <- fallback language code, if history mode or network is unavailable
     voice: 'Google Deutsch', // <- voice of Text-To-Speech; for reference, see: https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisVoice/voiceURI
