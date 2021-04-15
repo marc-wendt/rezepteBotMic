@@ -180,6 +180,8 @@ export default {
     },
     methods: {
         send(submission){
+            this.$refs.input.speaking= true
+            this.$refs.input.wartet= false
             let request
 
             /* Text request */
@@ -197,7 +199,7 @@ export default {
 
             /* Audio request */
             else if (submission.audio){
-                this.muted = false
+                this.muted = false //FALSE****
 
                 request = {
                     session: this.session,
@@ -246,6 +248,7 @@ export default {
             }
 
             else {
+                
                 let text = '' // <- init a text variable
 
                 /* Dialogflow Text/SimpleResponses */
@@ -275,11 +278,12 @@ export default {
                 console.log(`Voices #: ${speechSynthesis.getVoices().length}`)
 
                 speechSynthesis.getVoices().forEach(voice => {
-                console.log(voice.name, voice.lang)
+                //console.log(voice.name, voice.lang)
                 })
                 let isPlaying = false;
                 
                 speech.voice = voices[4]
+
                 
 
                 var isSafari = window.safari !== undefined;
@@ -305,6 +309,8 @@ export default {
 
                 synth.speak(speech) // <- if app is not muted, speak out the speech
                 isPlaying = true;
+
+                
                 //console.log("paused:" + synth.paused + " pending:" + synth.pending + " speak:" + synth.speaking);
 
                 if(this.$browserDetect.isChrome){
@@ -320,7 +326,10 @@ export default {
 
                 speech.onend = () => {
                     isPlaying = false;
+                    this.$refs.input.speaking = false
+                    this.$refs.input.wartet= true
                 }
+
 		}
             }
         },
