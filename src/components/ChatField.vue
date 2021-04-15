@@ -6,9 +6,10 @@
                 key="microphone"
                 class="chat-field-action"
                 :aria-label='microphone'
-                :class="{'mic_active': microphone}"
+                :class="{'mic_active': microphone, 'speaking': speaking, 'wartet': wartet}"
                 :disabled="disabled"
                 @click="microphone = !microphone">
+
                 <i class="material-icons" aria-hidden="true">mic</i>
             </button>
     </div>
@@ -30,22 +31,36 @@
     z-index: 2
 
 
+
 .chat-field-action
     @include reset
     cursor: pointer
     color: var(--accent)
     font-size: 50px
     display: flex
+    
 
     &:disabled
         cursor: not-allowed
 
+    &.wartet
+        color: var(--accent)
+
     &.mic_active
         color: #F44336
+        animation: bg-pulse-red 2s infinite steps(50)
+    
+    &.speaking
+        color: #2596be
+        animation: bg-pulse-blue 2s infinite steps(50)
+
+        
+
 
 </style>
 
 <script>
+
 import AudioRecorder from 'audio-recorder-polyfill'
 import * as hark from 'hark'
 
@@ -60,7 +75,9 @@ export default {
             recognition: null,
             recorder: null,
             should_listen: false,
-            disabled: false
+            disabled: false,
+            speaking: false,
+            wartet: false
         }
     },
     computed: {
@@ -121,6 +138,7 @@ export default {
     methods: {
         listen(){
             if (this.should_listen) this.microphone = false
+            console.log("HALLO HIER BIN ICH JETZT")
         },
         submit(submission){
             if (submission.text && submission.text.length > 0){
