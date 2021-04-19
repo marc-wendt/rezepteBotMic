@@ -328,6 +328,7 @@ export default {
                 }, 14000);
 
                 speech.onend = () => {
+		    console.log("SPEECH-ONEND")
                     isPlaying = false;
                     this.$refs.input.speaking = false
                     //this.$refs.input.wartet= true
