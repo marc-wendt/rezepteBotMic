@@ -326,19 +326,19 @@ export default {
                         synth.resume();
                     } 
                 }, 14000);
+		}
 		
-		speech.addEventListener('end', function(event) {
-  			console.log('Utterance has finished being spoken after ' + event.elapsedTime + ' milliseconds.');
-			console.log("SPEECH-ONEND")
+		speech.onend = () => {
+            		console.log("SPEECH-ONEND")
                     	isPlaying = false;
                     	this.$refs.input.speaking = false
                     	//this.$refs.input.wartet= true
-		    	this.$refs.input.listen() // AUTOMATISCH AN 2
-		});
+            		this.$refs.input.listen() // AUTOMATISCH AN 2
+                }
 		
 		
 		
-		}
+		
             }
         },
         /* Stop audio speech/playback */
