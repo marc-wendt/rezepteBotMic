@@ -278,7 +278,7 @@ export default {
                 console.log(`Voices #: ${speechSynthesis.getVoices().length}`)
 
                 speechSynthesis.getVoices().forEach(voice => {
-                //console.log(voice.name, voice.lang)
+                console.log(voice.name, voice.lang)
                 })
                 let isPlaying = false;
                 
