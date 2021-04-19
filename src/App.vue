@@ -89,13 +89,6 @@ export default {
         }
     },
     computed: {
-    	endFunction(){
-		    console.log("SPEECH-ONEND")
-                    isPlaying = false;
-                    this.$refs.input.speaking = false
-                    //this.$refs.input.wartet= true
-		    this.$refs.input.listen() // AUTOMATISCH AN 2	
-		}
         /* The code below is used to extract suggestions from last message, to display it on ChatInput */
         suggestions(){
             if (this.messages.length > 0){
@@ -338,7 +331,13 @@ export default {
 
 
 		
-		speech.onende = endFunction()
+		speech.onend = () => {
+            	    console.log("SPEECH-ONEND")
+                    isPlaying = false;
+                    this.$refs.input.speaking = false
+                    //this.$refs.input.wartet= true
+                    this.$refs.input.listen() // AUTOMATISCH AN 2
+                }
 
 		}
             }
