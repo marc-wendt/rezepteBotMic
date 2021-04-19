@@ -326,6 +326,14 @@ export default {
                         synth.resume();
                     } 
                 }, 14000);
+		
+		endFunction(){
+		    console.log("SPEECH-ONEND")
+                    isPlaying = false;
+                    this.$refs.input.speaking = false
+                    //this.$refs.input.wartet= true
+		    this.$refs.input.listen() // AUTOMATISCH AN 2	
+		}
 
                 speech.onend = () => {
 		    console.log("SPEECH-ONEND")
@@ -334,6 +342,8 @@ export default {
                     //this.$refs.input.wartet= true
 		    this.$refs.input.listen() // AUTOMATISCH AN 2
                 }
+		
+		speech.onende = endFunction()
 
 		}
             }
