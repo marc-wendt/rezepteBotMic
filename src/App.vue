@@ -329,9 +329,9 @@ export default {
 
                 speech.onend = () => {
                     isPlaying = false;
-		    this.$refs.input.listen() // AUTOMATISCH AN 2
                     this.$refs.input.speaking = false
-                    this.$refs.input.wartet= true
+                    //this.$refs.input.wartet= true
+		    this.$refs.input.listen() // AUTOMATISCH AN 2
                 }
 
 		}
