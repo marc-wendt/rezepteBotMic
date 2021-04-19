@@ -336,13 +336,7 @@ export default {
 		
 		
 
-                speech.onend = () => {
-		    console.log("SPEECH-ONEND")
-                    isPlaying = false;
-                    this.$refs.input.speaking = false
-                    //this.$refs.input.wartet= true
-		    this.$refs.input.listen() // AUTOMATISCH AN 2
-                }
+
 		
 		speech.onende = endFunction()
 
