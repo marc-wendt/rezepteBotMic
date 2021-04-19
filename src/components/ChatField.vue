@@ -137,7 +137,7 @@ export default {
     },
     methods: {
         listen(){
-            if (this.should_listen) this.microphone = true
+            if (this.should_listen) this.microphone = true // AUTOMATISCH AN 1
             console.log("HALLO HIER BIN ICH JETZT")
         },
         submit(submission){
