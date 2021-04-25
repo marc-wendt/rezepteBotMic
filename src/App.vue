@@ -296,7 +296,7 @@ export default {
                 } else {
                     if(this.$browserDetect.isChrome){
                         console.log("Chrome")
-                        speech.voice = voices[2]
+                        speech.voice = voices[0]
 			if(navigator.appVersion.indexOf("Mac")!=-1){
 			speech.voice = voices[0]
 			}
