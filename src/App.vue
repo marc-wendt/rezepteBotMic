@@ -272,7 +272,7 @@ export default {
                 speech.lang = "de-DE";
                 //speech.pitch = 1.1;
                 //speech.rate = 1;
-                //speech.voice = voices[1]
+                //speech.voice = voices[0]
                 console.log(speech.pitch, speech.rate, speech.voice )
 
                 console.log(`Voices #: ${speechSynthesis.getVoices().length}`)
