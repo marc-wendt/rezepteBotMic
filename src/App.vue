@@ -300,7 +300,7 @@ export default {
 			speech.rate = 0.9;
 			if(navigator.appVersion.indexOf("Mac")!=-1){
 			speech.voice = voices[0]
-			speech.rate = 0.8;
+			speech.rate = 0.9;
 			}
                     } else if(this.$browserDetect.isFirefox){
                         console.log("Firefox")
