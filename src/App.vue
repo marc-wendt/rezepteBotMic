@@ -333,8 +333,9 @@ export default {
 		speech.onend = () => {
                     	isPlaying = false;
 			if(this.$browserDetect.isChrome){
-			this.$refs.input.listen() // AUTOMATISCH AN 2
+			 // AUTOMATISCH AN 2
 			}
+			this.$refs.input.listen()
                     	this.$refs.input.speaking = false
                     	this.$refs.input.wartet= true
                 }
